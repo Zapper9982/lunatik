@@ -10,6 +10,9 @@ if LUNATIK
 config LUNATIK_RUNTIME
 	bool
 	default y
+	help
+	  Enables the core Lunatik runtime environment, allowing creation of
+	  isolated Lua states within the kernel.
 
 config LUNATIK_RUN
 	tristate "Lunatik Run (Execution Support)"
