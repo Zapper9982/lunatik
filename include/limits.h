@@ -12,6 +12,14 @@
 #define CHAR_BIT	(8)
 
 /**
+ * vdso/limits.h defines UINT_MAX as (~0U) which might expand to 0xFFFFFFFFFFFFFFFF
+ * in the '#if' directive [https://gcc.gnu.org/onlinedocs/cpp/If.html] which breaks
+ * "#if (UINT_MAX >> 30) > 3" on ltable.c
+ **/
+#undef UINT_MAX
+#define UINT_MAX	(4294967295U)
+
+/**
  * vdso/limits.h defines INT_MAX as ((int)(~0U >> 1)) which breaks
  * "#if MAX_CNST/(MAXARG_vC + 1) > MAXARG_Ax" on lparser.c
  * see https://gcc.gnu.org/onlinedocs/cpp/If.html
