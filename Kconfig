@@ -1,4 +1,4 @@
-config LUNATIK
+menuconfig LUNATIK
 	tristate "Lunatik Lua Interpreter"
 	default m
 	help
@@ -10,15 +10,19 @@ if LUNATIK
 config LUNATIK_RUNTIME
 	bool
 	default y
+	select LUNATIK_DEVICE
+	select LUNATIK_RCU
 	help
 	  Enables the core Lunatik runtime environment, allowing creation of
-	  isolated Lua states within the kernel.
+	  isolated Lua states within the kernel. This requires both device
+	  and RCU support.
 
 config LUNATIK_RUN
 	tristate "Lunatik Run (Execution Support)"
-	default m
+	default y
 	help
-	  Support for running Lua scripts in the kernel.
+	  Support for running Lua scripts in the kernel. This is required
+	  for basic script execution functionality.
 
 config LUNATIK_DEVICE
 	tristate "Lunatik Device Support"
